@@ -1,5 +1,5 @@
 
-const DATA_VERSION = 'v4_full_40_articles';
+const DATA_VERSION = 'v5_subcategories_fix';
 
 const INITIAL_ARTICLES = [
   // --- BẤT ĐỘNG SẢN (10 BÀI) ---
@@ -607,6 +607,7 @@ function renderFooterCategories(menu) {
   }
 }
 
+// Hàm lọc chuyên mục có tích hợp ánh xạ chuyên mục con -> cha
 function filterCategory(categoryName) {
   document.getElementById('detail-view').style.display = 'none';
   document.getElementById('news-view').style.display = 'block';
@@ -614,13 +615,30 @@ function filterCategory(categoryName) {
   const articles = getArticles();
   if (categoryName === 'Trang chủ' || categoryName === 'Mới nhất' || categoryName === 'Home') {
     renderArticles(articles);
-  } else {
-    const filtered = articles.filter(a => 
-      a.category.toLowerCase().includes(categoryName.toLowerCase()) || 
-      categoryName.toLowerCase().includes(a.category.toLowerCase())
-    );
-    renderArticles(filtered);
+    return;
   }
+
+  // Ánh xạ tất cả các chuyên mục con về chuyên mục cha tương ứng
+  const subCategoryMap = {
+    'Quân sự': 'Thế giới',
+    'Phân tích - Bình luận': 'Thế giới',
+    'Thế giới đó đây': 'Thế giới',
+    'Kiều bào': 'Thế giới',
+    'Chính trị': 'Thời sự',
+    'Giao thông': 'Thời sự',
+    'Môi trường': 'Thời sự',
+    'Nóng trên mạng': 'Thời sự'
+  };
+
+  const targetCategory = subCategoryMap[categoryName] || categoryName;
+
+  const filtered = articles.filter(a => 
+    a.category.toLowerCase().includes(targetCategory.toLowerCase()) || 
+    targetCategory.toLowerCase().includes(a.category.toLowerCase()) ||
+    a.category.toLowerCase().includes(categoryName.toLowerCase())
+  );
+
+  renderArticles(filtered);
 }
 
 // Sắp xếp bài viết theo thời gian giảm dần (mới -> cũ) & Render layout 1-2 Top section
