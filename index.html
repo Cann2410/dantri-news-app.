@@ -5,21 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dân Trí Replica - Trang tin tức</title>
   <link rel="stylesheet" href="css/style.css">
-  <!-- FontAwesome Icons cho Mạng xã hội -->
+  <!-- FontAwesome Icons cho Mạng xã hội & Thông tin liên hệ -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
+  <!-- HEADER WEBSITE -->
   <header>
     <div class="header-container">
       <a href="index.html" class="logo">DÂN TRÍ REPLICA</a>
-      <a href="crawler.html" style="color: var(--primary-color); font-weight: bold; text-decoration: none;">⚙️ Công cụ Crawler</a>
+      <a href="crawler.html" style="color: var(--primary-color, #10b981); font-weight: bold; text-decoration: none;">⚙️ Công cụ Crawler</a>
     </div>
     <nav>
       <ul class="navbar" id="navbar"></ul>
     </nav>
   </header>
 
+  <!-- NỘI DUNG CHÍNH -->
   <main class="container">
     <!-- View Danh Sách Bài Viết -->
     <div id="news-view">
@@ -35,11 +37,12 @@
     <div id="detail-view" style="display: none;"></div>
   </main>
 
-  <!-- Footer chuẩn đề bài -->
-  <footer>
+  <!-- FOOTER WEBSITE -->
+  <footer class="site-footer">
     <div class="footer-container">
+      <!-- Cột 1: Thông tin website -->
       <div class="footer-col">
-        <h3>Về Chúng Tôi</h3>
+        <h3 class="footer-logo">Về Chúng Tôi</h3>
         <p>Trang tin tức tổng hợp tự động cập nhật nhanh chóng, chính xác từ Báo Dân trí.</p>
         <div class="social-links">
           <a href="https://facebook.com" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
@@ -47,24 +50,32 @@
           <a href="https://tiktok.com" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
         </div>
       </div>
+
+      <!-- Cột 2: Liên kết nhanh -->
       <div class="footer-col">
         <h3>Liên Kết Nhanh</h3>
         <ul>
-          <li><a href="index.html">Trang chủ</a></li>
+          <li><a href="#" onclick="filterCategory('Trang chủ')">Trang chủ</a></li>
           <li><a href="#" onclick="filterCategory('Mới nhất')">Tin mới nhất</a></li>
           <li><a href="crawler.html">Crawl tin tức</a></li>
         </ul>
       </div>
+
+      <!-- Cột 3: Chuyên mục (Tự động nạp qua JS) -->
       <div class="footer-col">
         <h3>Chuyên Mục</h3>
         <ul id="footer-categories"></ul>
       </div>
+
+      <!-- Cột 4: Thông tin liên hệ -->
       <div class="footer-col">
         <h3>Liên Hệ</h3>
         <p><i class="fas fa-envelope"></i> Email: contact@dantridemo.vn</p>
         <p><i class="fas fa-map-marker-alt"></i> Địa chỉ: Số 2 Giảng Võ, Cát Linh, Đống Đa, Hà Nội</p>
       </div>
     </div>
+
+    <!-- Bản quyền -->
     <div class="footer-bottom">&copy; 2026 DanTri Replica Project. All rights reserved.</div>
   </footer>
 
