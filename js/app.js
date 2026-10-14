@@ -1,4 +1,4 @@
-// Phiên bản dữ liệu v6 - Gán nhãn chuyên mục con chuẩn xác
+
 const DATA_VERSION = 'v6_tagged_subcategories';
 
 const INITIAL_ARTICLES = [
