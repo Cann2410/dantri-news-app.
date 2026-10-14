@@ -1,4 +1,5 @@
-const DATA_VERSION = 'v8_schema_spec_fix';
+// Mã phiên bản v9 - Tự động xóa LocalStorage cũ & tương thích 100% dữ liệu
+const DATA_VERSION = 'v9_final_restructure';
 
 const INITIAL_ARTICLES = [
   // --- BẤT ĐỘNG SẢN (10 BÀI) ---
@@ -536,7 +537,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   renderArticles();
 });
 
-// Ép buộc xóa bộ nhớ đệm cũ khi nâng cấp version
+// Nạp bài viết và xóa LocalStorage cũ khi có phiên bản mới
 function initArticlesData() {
   const currentVersion = localStorage.getItem('data_version');
   if (currentVersion !== DATA_VERSION || !localStorage.getItem('articles')) {
@@ -547,7 +548,12 @@ function initArticlesData() {
 }
 
 function getArticles() {
-  return JSON.parse(localStorage.getItem('articles')) || [];
+  try {
+    const data = localStorage.getItem('articles');
+    return data ? JSON.parse(data) : INITIAL_ARTICLES;
+  } catch (e) {
+    return INITIAL_ARTICLES;
+  }
 }
 
 async function loadCategories() {
@@ -607,13 +613,13 @@ function renderFooterCategories(menu) {
   }
 }
 
-// Hàm hỗ trợ định dạng chuỗi Chuyên mục
+// Xử lý chuyển đổi kiểu Chuyên mục (Array / String)
 function getCategoryString(cate) {
   if (Array.isArray(cate)) return cate.join(', ');
   return cate || '';
 }
 
-// Hàm hỗ trợ định dạng Tác giả
+// Xử lý chuyển đổi kiểu Tác giả (Object / String)
 function getAuthorName(author) {
   if (typeof author === 'object' && author !== null) return author.name || 'Ban Biên Tập';
   return author || 'Ban Biên Tập';
@@ -638,4 +644,106 @@ function filterCategory(categoryName) {
   });
 
   renderArticles(filtered);
+}
+
+function renderArticles(list = getArticles()) {
+  const sorted = [...list].sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
+
+  const topSection = document.getElementById('top-section');
+  const remainingList = document.getElementById('remaining-posts');
+
+  if (!topSection || !remainingList) return;
+
+  topSection.innerHTML = '';
+  remainingList.innerHTML = '';
+
+  if (sorted.length === 0) {
+    remainingList.innerHTML = '<p style="padding:20px; color:#666;">Chưa có bài viết nào trong chuyên mục này.</p>';
+    return;
+  }
+
+  const top3 = sorted.slice(0, 3);
+  const remaining = sorted.slice(3);
+
+  // Bài lớn bên trái (Featured)
+  if (top3[0]) {
+    const featured = document.createElement('div');
+    featured.className = 'featured-post';
+    featured.onclick = () => showDetail(top3[0].id);
+    featured.innerHTML = `
+      <img src="${top3[0].image || 'https://via.placeholder.com/600x300'}" alt="${top3[0].title}">
+      <div class="info">
+        <h2>${top3[0].title}</h2>
+        <p>${top3[0].excerpt}</p>
+        <span class="post-meta">${top3[0].publishedAt} | ${getCategoryString(top3[0].category)}</span>
+      </div>
+    `;
+    topSection.appendChild(featured);
+  }
+
+  // 2 bài nhỏ bên phải
+  if (top3.length > 1) {
+    const sideBox = document.createElement('div');
+    sideBox.className = 'side-posts';
+    top3.slice(1, 3).forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'side-post-card';
+      card.onclick = () => showDetail(item.id);
+      card.innerHTML = `
+        <img src="${item.image || 'https://via.placeholder.com/100x75'}" alt="${item.title}">
+        <div>
+          <h3>${item.title}</h3>
+          <span class="post-meta">${item.publishedAt}</span>
+        </div>
+      `;
+      sideBox.appendChild(card);
+    });
+    topSection.appendChild(sideBox);
+  }
+
+  // Các bài còn lại
+  remaining.forEach(item => {
+    const postEl = document.createElement('div');
+    postEl.className = 'post-item';
+    postEl.onclick = () => showDetail(item.id);
+    postEl.innerHTML = `
+      <img src="${item.image || 'https://via.placeholder.com/180x120'}" alt="${item.title}">
+      <div class="post-item-content">
+        <h3>${item.title}</h3>
+        <p>${item.excerpt}</p>
+        <div class="post-meta">Tác giả: ${getAuthorName(item.author)} | ${item.publishedAt} | Chuyên mục: ${getCategoryString(item.category)}</div>
+      </div>
+    `;
+    remainingList.appendChild(postEl);
+  });
+}
+
+function showDetail(id) {
+  const articles = getArticles();
+  const post = articles.find(a => a.id === id);
+  if (!post) return;
+
+  document.getElementById('news-view').style.display = 'none';
+  const detailView = document.getElementById('detail-view');
+  detailView.style.display = 'block';
+
+  detailView.innerHTML = `
+    <button onclick="backToHome()" style="margin-bottom:15px; padding: 8px 16px; cursor:pointer; background:#e5e7eb; border:none; border-radius:4px; font-weight:600;">← Quay lại</button>
+    <div class="article-detail">
+      <h1>${post.title}</h1>
+      <div class="meta-info">
+        <span>Chuyên mục: <strong>${getCategoryString(post.category)}</strong></span> | 
+        <span>Đăng ngày: ${post.publishedAt}</span> | 
+        <span>Tác giả: <strong>${getAuthorName(post.author)}</strong></span>
+      </div>
+      <p class="sapo">${post.excerpt}</p>
+      ${post.image ? `<img src="${post.image}" alt="${post.title}">` : ''}
+      <div class="content">${post.content}</div>
+    </div>
+  `;
+}
+
+function backToHome() {
+  document.getElementById('detail-view').style.display = 'none';
+  document.getElementById('news-view').style.display = 'block';
 }
