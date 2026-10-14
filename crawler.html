@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Công cụ Crawler - Dân Trí Replica</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .crawler-box { background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); max-width: 800px; margin: 30px auto; }
+    .input-group { display: flex; gap: 10px; margin: 15px 0; }
+    .input-group input { flex: 1; padding: 10px 14px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; }
+    .btn { background: var(--primary-color); color: #fff; border: none; padding: 10px 20px; border-radius: 4px; font-weight: bold; cursor: pointer; }
+    .btn:hover { opacity: 0.9; }
+    .btn-save { background: #1d4ed8; margin-top: 15px; display: none; }
+    pre { background: #1e1e1e; color: #4af626; padding: 15px; border-radius: 6px; overflow-x: auto; font-size: 13px; max-height: 350px; }
+    .status { margin: 10px 0; font-weight: bold; }
+    .status.success { color: #059669; }
+    .status.error { color: #dc2626; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <a href="index.html" class="logo">DÂN TRÍ REPLICA</a>
+      <a href="index.html" style="color: var(--primary-color); font-weight: bold; text-decoration: none;">🏠 Về Trang Chủ</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="crawler-box">
+      <h2>Thu thập dữ liệu bài viết Dân Trí</h2>
+      <p style="color: #666; font-size: 14px; margin-top: 5px;">Nhap URL bài viết từ website dantri.com.vn:</p>
+      
+      <div class="input-group">
+        <input type="text" id="crawl-url" placeholder="https://dantri.com.vn/bat-dong-san/..." value="https://dantri.com.vn/bat-dong-san/ha-noi-tinh-co-che-boi-thuong-dat-dac-biet-cho-7-du-an-duong-sat-20260928122246655.htm">
+        <button class="btn" onclick="handleCrawl()">Bắt đầu Crawl</button>
+      </div>
+
+      <div id="status" class="status"></div>
+      <pre id="json-result">// Kết quả JSON sẽ hiển thị tại đây...</pre>
+      
+      <button id="btn-save" class="btn btn-save" onclick="saveToLocalStorage()">💾 Lưu bài viết vào LocalStorage</button>
+    </div>
+  </main>
+
+  <script src="js/crawler.js"></script>
+  <script>
+    let currentCrawledArticle = null;
+
+    async function handleCrawl() {
+      const url = document.getElementById('crawl-url').value.trim();
+      const statusEl = document.getElementById('status');
+      const resultEl = document.getElementById('json-result');
+      const btnSave = document.getElementById('btn-save');
+
+      if (!url) {
+        alert('Vui lòng nhập URL bài viết!');
+        return;
+      }
+
+      statusEl.className = 'status';
+      statusEl.innerText = '⏳ Đang thu thập dữ liệu từ Dân Trí...';
+      resultEl.innerText = '// Đang xử lý...';
+      btnSave.style.display = 'none';
+
+      try {
+        currentCrawledArticle = await crawlDantriArticle(url);
+        statusEl.className = 'status success';
+        statusEl.innerText = '✅ Cào dữ liệu thành công!';
+        resultEl.innerText = JSON.stringify(currentCrawledArticle, null, 2);
+        btnSave.style.display = 'inline-block';
+      } catch (e) {
+        statusEl.className = 'status error';
+        statusEl.innerText = '❌ Lỗi cào dữ liệu.';
+        resultEl.innerText = '// Không thể lấy dữ liệu từ URL này.';
+      }
+    }
+
+    function saveToLocalStorage() {
+      if (!currentCrawledArticle) return;
+      
+      let articles = JSON.parse(localStorage.getItem('articles')) || [];
+      // Đưa bài vừa cào lên đầu danh sách
+      articles = [currentCrawledArticle, ...articles.filter(a => a.id !== currentCrawledArticle.id)];
+      localStorage.setItem('articles', JSON.stringify(articles));
+
+      alert('🎉 Đã lưu bài viết vào LocalStorage thành công! Hãy về Trang Chủ để xem.');
+    }
+  </script>
+</body>
+</html>
