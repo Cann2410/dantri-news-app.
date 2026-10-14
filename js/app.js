@@ -1,5 +1,5 @@
-
-const DATA_VERSION = 'v5_subcategories_fix';
+// Phiên bản dữ liệu v6 - Gán nhãn chuyên mục con chuẩn xác
+const DATA_VERSION = 'v6_tagged_subcategories';
 
 const INITIAL_ARTICLES = [
   // --- BẤT ĐỘNG SẢN (10 BÀI) ---
@@ -134,7 +134,7 @@ const INITIAL_ARTICLES = [
     url: "https://dantri.com.vn/bat-dong-san/thao-go-vuong-mac.htm"
   },
 
-  // --- THỜI SỰ (10 BÀI) ---
+  // --- THỜI SỰ (Phân chia chuyên mục con: Chính trị, Giao thông, Môi trường, Nóng trên mạng) ---
   {
     id: "dtri-ts-01",
     title: "Tổng Bí thư, Chủ tịch nước: Pháp luật phải đủ ổn định để người dân yên tâm",
@@ -143,7 +143,7 @@ const INITIAL_ARTICLES = [
     content: "Phát biểu tại buổi làm việc về công tác xây dựng và hoàn thiện thể chế, Tổng Bí thư, Chủ tịch nước khẳng định hệ thống pháp luật đóng vai trò nền tảng cho sự phát triển bền vững.",
     image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600",
     author: "Nguyễn Hoàng",
-    category: "Thời sự",
+    category: "Chính trị",
     publishedAt: "2026-10-15 07:30",
     source: "dantri.com.vn",
     url: "https://dantri.com.vn/thoi-su/tong-bi-thu-chu-tich-nuoc-phap-luat-phai-du-on-dinh-de-nguoi-dan-yen-tam-20260928141449559.htm"
@@ -156,7 +156,7 @@ const INITIAL_ARTICLES = [
     content: "Công trình nâng cấp tuyến đại lộ trọng điểm có tổng chiều dài hơn 15km với quy mô 8 làn xe cơ giới.",
     image: "https://images.unsplash.com/photo-1590674899484-d5640e854abe?w=600",
     author: "Minh Tuấn",
-    category: "Thời sự",
+    category: "Giao thông",
     publishedAt: "2026-10-14 18:00",
     source: "dantri.com.vn",
     url: "https://dantri.com.vn/thoi-su/mo-rong-dai-lo.htm"
@@ -169,7 +169,7 @@ const INITIAL_ARTICLES = [
     content: "Lực lượng chức năng tăng cường xử lý các vi phạm dừng đỗ sai quy định, chạy quá tốc độ và nồng độ cồn.",
     image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=600",
     author: "Hùng Cường",
-    category: "Thời sự",
+    category: "Giao thông",
     publishedAt: "2026-10-13 16:45",
     source: "dantri.com.vn",
     url: "https://dantri.com.vn/thoi-su/giao-thong-cao-toc.htm"
@@ -182,7 +182,7 @@ const INITIAL_ARTICLES = [
     content: "Thành phố tập trung nguồn lực tách triệt để nước thải chưa qua xử lý xả thẳng ra sông Tô Lịch, sông Lừ.",
     image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600",
     author: "Thu Trang",
-    category: "Thời sự",
+    category: "Môi trường",
     publishedAt: "2026-10-12 10:20",
     source: "dantri.com.vn",
     url: "https://dantri.com.vn/thoi-su/moi-truong-song-noi-do.htm"
@@ -195,7 +195,7 @@ const INITIAL_ARTICLES = [
     content: "Phương án đề xuất nghỉ từ 28 tháng Chạp năm Bính Ngọ đến hết mùng 7 tháng Giêng năm Đinh Mùi.",
     image: "https://images.unsplash.com/photo-1543807535-eceef0bc6599?w=600",
     author: "Hải Yến",
-    category: "Thời sự",
+    category: "Chính trị",
     publishedAt: "2026-10-11 14:15",
     source: "dantri.com.vn",
     url: "https://dantri.com.vn/thoi-su/lich-nghi-tet.htm"
@@ -208,7 +208,7 @@ const INITIAL_ARTICLES = [
     content: "Cây cầu có thiết kế kiến trúc dạng vòm thép hiện đại, dài hơn 3km với tổng mức đầu tư hơn 8.000 tỷ đồng.",
     image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600",
     author: "Minh Tuấn",
-    category: "Thời sự",
+    category: "Giao thông",
     publishedAt: "2026-10-10 09:00",
     source: "dantri.com.vn",
     url: "https://dantri.com.vn/thoi-su/khoi-cong-cau-song-hong.htm"
@@ -221,7 +221,7 @@ const INITIAL_ARTICLES = [
     content: "Các trạm y tế xã phường đồng loạt tổ chức tiêm chủng an toàn, đảm bảo tỷ lệ bao phủ trên 95%.",
     image: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=600",
     author: "Nguyễn Hoàng",
-    category: "Thời sự",
+    category: "Chính trị",
     publishedAt: "2026-10-09 11:30",
     source: "dantri.com.vn",
     url: "https://dantri.com.vn/thoi-su/tiem-chung-mo-rong.htm"
@@ -234,7 +234,7 @@ const INITIAL_ARTICLES = [
     content: "Bộ Thông tin và Truyền thông tăng cường rà soát không gian mạng, yêu cầu gỡ bỏ kịp thời các nội dung độc hại.",
     image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600",
     author: "Quang Huy",
-    category: "Thời sự",
+    category: "Nóng trên mạng",
     publishedAt: "2026-10-08 15:45",
     source: "dantri.com.vn",
     url: "https://dantri.com.vn/thoi-su/nong-tren-mang-xu-ly-tin-gia.htm"
@@ -247,7 +247,7 @@ const INITIAL_ARTICLES = [
     content: "Các tỉnh Bắc Bộ và Bắc Trung Bộ nền nhiệt giảm sâu từ 4-6 độ C, vùng núi cao có nơi dưới 12 độ C.",
     image: "https://images.unsplash.com/photo-1519692933481-e162a57d6721?w=600",
     author: "Thu Trang",
-    category: "Thời sự",
+    category: "Môi trường",
     publishedAt: "2026-10-07 07:10",
     source: "dantri.com.vn",
     url: "https://dantri.com.vn/thoi-su/khong-khi-lanh-tang-cuong.htm"
@@ -260,13 +260,13 @@ const INITIAL_ARTICLES = [
     content: "Dữ liệu chỉ số chất lượng không khí (AQI) được công khai liên tục trên phần mềm di động.",
     image: "https://images.unsplash.com/photo-1498084393753-b411b2d26b34?w=600",
     author: "Minh Tuấn",
-    category: "Thời sự",
+    category: "Môi trường",
     publishedAt: "2026-10-06 16:00",
     source: "dantri.com.vn",
     url: "https://dantri.com.vn/thoi-su/moi-truong-quan-trac-aqi.htm"
   },
 
-  // --- THẾ GIỚI (10 BÀI) ---
+  // --- THẾ GIỚI (Phân chia chuyên mục con: Quân sự, Phân tích - Bình luận, Thế giới đó đây, Kiều bào) ---
   {
     id: "dtri-tg-01",
     title: "Căng thẳng địa chính trị ảnh hưởng đến thị trường năng lượng toàn cầu",
@@ -275,7 +275,7 @@ const INITIAL_ARTICLES = [
     content: "Thị trường năng lượng toàn cầu tiếp tục ghi nhận các đợt tăng giá do lo ngại gián đoạn chuỗi cung ứng tại các tuyến đường hàng hải chiến lược.",
     image: "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=600",
     author: "Thanh Bình",
-    category: "Thế giới",
+    category: "Quân sự",
     publishedAt: "2026-10-15 06:45",
     source: "dantri.com.vn",
     url: "https://dantri.com.vn/the-gioi/cang-thang-dia-chinh-tri.htm"
@@ -288,7 +288,7 @@ const INITIAL_ARTICLES = [
     content: "Tuyên bố chung của hội nghị nhấn mạnh việc thúc đẩy tài chính khí hậu, hỗ trợ các nước đang phát triển tiếp cận công nghệ mới.",
     image: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=600",
     author: "Anh Quân",
-    category: "Thế giới",
+    category: "Phân tích - Bình luận",
     publishedAt: "2026-10-14 13:20",
     source: "dantri.com.vn",
     url: "https://dantri.com.vn/the-gioi/g20-thuong-dinh-khi-hau.htm"
@@ -301,7 +301,7 @@ const INITIAL_ARTICLES = [
     content: "Chuyến bay thử nghiệm mở ra triển vọng giảm đáng kể chi phí vận chuyển hàng hóa lên Trạm Vũ trụ Quốc tế.",
     image: "https://images.unsplash.com/photo-1517976487492-5750f3195933?w=600",
     author: "Thanh Bình",
-    category: "Thế giới",
+    category: "Quân sự",
     publishedAt: "2026-10-13 20:10",
     source: "dantri.com.vn",
     url: "https://dantri.com.vn/the-gioi/ten-lua-vu-tru-moi.htm"
@@ -314,7 +314,7 @@ const INITIAL_ARTICLES = [
     content: "Chính sách gia tăng dự trữ chiến lược giúp đảm bảo nguồn cung thực phẩm thiết yếu ổn định.",
     image: "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=600",
     author: "Phương Thảo",
-    category: "Thế giới",
+    category: "Thế giới đó đây",
     publishedAt: "2026-10-12 15:30",
     source: "dantri.com.vn",
     url: "https://dantri.com.vn/the-gioi/an-ninh-luong-thuc-chau-au.htm"
@@ -327,7 +327,7 @@ const INITIAL_ARTICLES = [
     content: "Thỏa thuận hợp tác chiến lược thúc đẩy chuỗi cung ứng công nghệ cao an toàn giữa hai bên bờ Đại Tây Dương.",
     image: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=600",
     author: "Anh Quân",
-    category: "Thế giới",
+    category: "Phân tích - Bình luận",
     publishedAt: "2026-10-11 11:00",
     source: "dantri.com.vn",
     url: "https://dantri.com.vn/the-gioi/thoa-thuan-cong-nghe-my-eu.htm"
@@ -340,7 +340,7 @@ const INITIAL_ARTICLES = [
     content: "Các tổ chức nhân đạo quốc tế khẩn trương vận chuyển lương thực, nước sạch và trang thiết bị y tế.",
     image: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=600",
     author: "Thanh Bình",
-    category: "Thế giới",
+    category: "Thế giới đó đây",
     publishedAt: "2026-10-10 18:20",
     source: "dantri.com.vn",
     url: "https://dantri.com.vn/the-gioi/lhq-vien-tro-thien-tai.htm"
@@ -353,7 +353,7 @@ const INITIAL_ARTICLES = [
     content: "Báo cáo của Ngân hàng Phát triển Châu Á (ADB) nâng dự báo tăng trưởng khu vực lên mức 4.9%.",
     image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600",
     author: "Phương Thảo",
-    category: "Thế giới",
+    category: "Phân tích - Bình luận",
     publishedAt: "2026-10-09 09:15",
     source: "dantri.com.vn",
     url: "https://dantri.com.vn/the-gioi/kinh-te-chau-a-tang-truong.htm"
@@ -366,23 +366,23 @@ const INITIAL_ARTICLES = [
     content: "Công trình nghiên cứu thử nghiệm lâm sàng tại các bệnh viện lớn cho thấy AI rút ngắn thời gian chẩn đoán.",
     image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600",
     author: "Anh Quân",
-    category: "Thế giới",
+    category: "Thế giới đó đây",
     publishedAt: "2026-10-08 14:00",
     source: "dantri.com.vn",
     url: "https://dantri.com.vn/the-gioi/dot-pha-y-hoc-ai.htm"
   },
   {
     id: "dtri-tg-09",
-    title: "Nhật Bản thúc đẩy năng lượng tái tạo hướng tới trung hòa carbon",
-    slug: "nhat-ban-thuc-day-nang-luong-tai-tao-huong-toi-trung-hoa-carbon",
-    excerpt: "Đầu tư mạnh mẽ vào hệ thống điện gió ngoài khơi và công nghệ pin lưu trữ hydro.",
-    content: "Chính phủ Nhật Bản ban hành chiến lược xanh mới với mục tiêu nâng tỷ trọng năng lượng tái tạo lên 40%.",
+    title: "Cộng đồng Kiều bào hướng về quê hương qua các chương trình văn hóa",
+    slug: "cong-dong-kieu-bao-huong-ve-que-huong",
+    excerpt: "Nhiều hoạt động giao lưu văn hóa nghệ thuật thu hút đông đảo người Việt tại nước ngoài tham gia.",
+    content: "Chương trình gắn kết cộng đồng kiều bào giúp gìn giữ bản sắc văn hóa dân tộc và thắt chặt tình đoàn kết hướng về cội nguồn.",
     image: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=600",
     author: "Phương Thảo",
-    category: "Thế giới",
+    category: "Kiều bào",
     publishedAt: "2026-10-07 10:45",
     source: "dantri.com.vn",
-    url: "https://dantri.com.vn/the-gioi/nhat-ban-nang-luong-xanh.htm"
+    url: "https://dantri.com.vn/the-gioi/kieu-bao-huong-ve-que-huong.htm"
   },
   {
     id: "dtri-tg-10",
@@ -392,7 +392,7 @@ const INITIAL_ARTICLES = [
     content: "Chỉ số giá tiêu dùng tại Mỹ và Châu Âu ghi nhận mức tăng chậm nhất trong vòng 3 năm qua.",
     image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600",
     author: "Thanh Bình",
-    category: "Thế giới",
+    category: "Phân tích - Bình luận",
     publishedAt: "2026-10-06 11:20",
     source: "dantri.com.vn",
     url: "https://dantri.com.vn/the-gioi/ha-nhiet-lam-phat.htm"
@@ -537,7 +537,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   renderArticles();
 });
 
-// Ép buộc nạp dữ liệu chuẩn 40 bài viết vào LocalStorage
+// Ép buộc nạp dữ liệu chuẩn 40 bài viết có gán chuyên mục con
 function initArticlesData() {
   const currentVersion = localStorage.getItem('data_version');
   if (currentVersion !== DATA_VERSION || !localStorage.getItem('articles')) {
@@ -607,36 +607,37 @@ function renderFooterCategories(menu) {
   }
 }
 
-// Hàm lọc chuyên mục có tích hợp ánh xạ chuyên mục con -> cha
+// Logic lọc chuyên mục thông minh: chọn Cha -> Hiện tất cả bài; chọn Con -> Hiện bài của Con
 function filterCategory(categoryName) {
   document.getElementById('detail-view').style.display = 'none';
   document.getElementById('news-view').style.display = 'block';
 
   const articles = getArticles();
+  
   if (categoryName === 'Trang chủ' || categoryName === 'Mới nhất' || categoryName === 'Home') {
     renderArticles(articles);
     return;
   }
 
-  // Ánh xạ tất cả các chuyên mục con về chuyên mục cha tương ứng
-  const subCategoryMap = {
-    'Quân sự': 'Thế giới',
-    'Phân tích - Bình luận': 'Thế giới',
-    'Thế giới đó đây': 'Thế giới',
-    'Kiều bào': 'Thế giới',
-    'Chính trị': 'Thời sự',
-    'Giao thông': 'Thời sự',
-    'Môi trường': 'Thời sự',
-    'Nóng trên mạng': 'Thời sự'
+  // Danh sách các chuyên mục con trực thuộc từng chuyên mục cha
+  const parentCategoryMap = {
+    'Thế giới': ['Thế giới', 'Quân sự', 'Phân tích - Bình luận', 'Thế giới đó đây', 'Kiều bào'],
+    'Thời sự': ['Thời sự', 'Chính trị', 'Giao thông', 'Môi trường', 'Nóng trên mạng']
   };
 
-  const targetCategory = subCategoryMap[categoryName] || categoryName;
+  let filtered = [];
 
-  const filtered = articles.filter(a => 
-    a.category.toLowerCase().includes(targetCategory.toLowerCase()) || 
-    targetCategory.toLowerCase().includes(a.category.toLowerCase()) ||
-    a.category.toLowerCase().includes(categoryName.toLowerCase())
-  );
+  if (parentCategoryMap[categoryName]) {
+    // Nếu nhấp vào CHUYÊN MỤC CHA -> Hiện tổng hợp tất cả bài thuộc các mục con
+    const allowed = parentCategoryMap[categoryName].map(c => c.toLowerCase());
+    filtered = articles.filter(a => allowed.includes(a.category.toLowerCase()));
+  } else {
+    // Nếu nhấp vào CHUYÊN MỤC CON -> Chỉ hiện các bài có category trùng tên mục con đó
+    filtered = articles.filter(a => 
+      a.category.toLowerCase().includes(categoryName.toLowerCase()) ||
+      categoryName.toLowerCase().includes(a.category.toLowerCase())
+    );
+  }
 
   renderArticles(filtered);
 }
